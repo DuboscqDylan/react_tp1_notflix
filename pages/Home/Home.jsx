@@ -1,128 +1,117 @@
 import { useState } from "react";
-import { Title } from "../../components/title/title";
+import { Title } from "../../components/title/Title";
+import { ListItems } from "../../components/listItems/ListItems";
 
 export const Home = () => {
 
     const [items, setItems] = useState([
         {
             id: 1,
-            titulo: "Interstellar",
+            title: "Interstellar",
             director: "Christopher Nolan",
-            anio: 2014,
-            genero: "Sci-fi",
+            year: 2014,
+            genre: "Sci-fi",
             rating: 8.7,
-            tipo: "pelicula",
-            vista: true
+            type: "pelicula",
+            watched: true
         },
         {
             id: 2,
-            titulo: "Lalaland",
+            title: "Lalaland",
             director: "Damien Chazelle",
-            anio: 2016,
-            genero: "Drama",
+            year: 2016,
+            genre: "Drama",
             rating: 8.0,
-            tipo: "pelicula",
-            vista: true
+            type: "pelicula",
+            watched: true
         },
         {
             id: 3,
-            titulo: "Pluribus",
+            title: "Pluribus",
             director: "Vince Gilligan",
-            anio: 2025,
-            genero: "Sci-fi",
+            year: 2025,
+            genre: "Sci-fi",
             rating: 8.0,
-            tipo: "serie",
-            vista: false
+            type: "serie",
+            watched: false
         },
     {
         id: 4,
-        titulo: "Inception",
+        title: "Inception",
         director: "Christopher Nolan",
-        anio: 2010,
-        genero: "Sci-fi",
+        year: 2010,
+        genre: "Sci-fi",
         rating: 8.8,
-        tipo: "pelicula",
-        vista: true
+        type: "pelicula",
+        watched: true
     },
     {
         id: 5,
-        titulo: "Breaking Bad",
+        title: "Breaking Bad",
         director: "Vince Gilligan",
-        anio: 2008,
-        genero: "Drama",
+        year: 2008,
+        genre: "Drama",
         rating: 9.5,
-        tipo: "serie",
-        vista: true
+        type: "serie",
+        watched: true
     },
     {
         id: 6,
-        titulo: "The Matrix",
+        title: "The Matrix",
         director: "Lana Wachowski",
-        anio: 1999,
-        genero: "Sci-fi",
+        year: 1999,
+        genre: "Sci-fi",
         rating: 8.7,
-        tipo: "pelicula",
-        vista: true
+        type: "pelicula",
+        watched: true
     },
     {
         id: 7,
-        titulo: "The Office",
+        title: "The Office",
         director: "Greg Daniels",
-        anio: 2005,
-        genero: "Comedia",
+        year: 2005,
+        genre: "Comedia",
         rating: 8.9,
-        tipo: "serie",
-        vista: false
+        type: "serie",
+        watched: false
     },
     {
         id: 8,
-        titulo: "Parasite",
+        title: "Parasite",
         director: "Bong Joon-ho",
-        anio: 2019,
-        genero: "Thriller",
+        year: 2019,
+        genre: "Thriller",
         rating: 8.6,
-        tipo: "pelicula",
-        vista: true
+        type: "pelicula",
+        watched: true
     },
     {
         id: 9,
-        titulo: "Stranger Things",
+        title: "Stranger Things",
         director: "Hermanos Duffer",
-        anio: 2016,
-        genero: "Sci-fi",
+        year: 2016,
+        genre: "Sci-fi",
         rating: 8.7,
-        tipo: "serie",
-        vista: false
+        type: "serie",
+        watched: false
     },
     {
         id: 10,
-        titulo: "Whiplash",
+        title: "Whiplash",
         director: "Damien Chazelle",
-        anio: 2014,
-        genero: "Drama",
+        year: 2014,
+        genre: "Drama",
         rating: 8.5,
-        tipo: "pelicula",
-        vista: true
+        type: "pelicula",
+        watched: true
     }
     ])
 
 
     return (
         <div>
-            <Title texto="Not-flix" />
-
-            {items.map((item) => (
-                <div key={item.id}>
-                    <h2>{item.titulo}</h2>
-                    <p>Director: {item.director}</p>
-                    <p>Año: {item.anio}</p>
-                    <p>Género: {item.genero}</p>
-                    <p>Rating: {item.rating}</p>
-                    <p>Tipo: {item.tipo}</p>
-                    <p>{item.vista ? "Vista" : "Sin ver"}</p>
-                    <hr />
-                </div>
-            ))}
+            <Title text="Not-flix" />
+            <ListItems list={items}/>
         </div>
     )
 }
