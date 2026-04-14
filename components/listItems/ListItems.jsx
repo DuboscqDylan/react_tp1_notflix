@@ -4,7 +4,7 @@ import styles from "./ListItems.module.css";
 export const ListItems = ({ list }) => {
     return (
         <>
-        <p>Items en la lista: {list.length === 0 ? "No hay elementos en la lista" : list.length}</p>
+        <p>{list.length === 0 ? "No hay elementos en la lista" : ""}</p>
         <ol className={styles.list}>
             {list.map((element) => (
                 <li key={element.id}>
