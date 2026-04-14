@@ -1,0 +1,21 @@
+.card {
+    background-color: #1e1e1e;
+    border: 1px solid #333;
+    border-radius: 10px;
+    padding: 16px;
+    margin: 8px 0;
+    color: #e5e5e5;
+    text-align: left;
+    min-width: 220px;
+}
+
+.card p {
+    margin: 4px 0;
+    font-size: 14px;
+}
+
+.card hr {
+    border: none;
+    border-top: 1px solid #333;
+    margin-top: 10px;
+}
