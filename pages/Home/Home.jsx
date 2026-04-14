@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Title } from "../../components/title/Title";
 import { ListItems } from "../../components/listItems/ListItems";
+import {Filters} from "../../components/filters/Filters";
 
 export const Home = () => {
 
@@ -12,7 +13,7 @@ export const Home = () => {
             year: 2014,
             genre: "Sci-fi",
             rating: 8.7,
-            type: "pelicula",
+            type: "movie",
             watched: true
         },
         {
@@ -22,7 +23,7 @@ export const Home = () => {
             year: 2016,
             genre: "Drama",
             rating: 8.0,
-            type: "pelicula",
+            type: "movie",
             watched: true
         },
         {
@@ -32,7 +33,7 @@ export const Home = () => {
             year: 2025,
             genre: "Sci-fi",
             rating: 8.0,
-            type: "serie",
+            type: "series",
             watched: false
         },
     {
@@ -42,7 +43,7 @@ export const Home = () => {
         year: 2010,
         genre: "Sci-fi",
         rating: 8.8,
-        type: "pelicula",
+        type: "movie",
         watched: true
     },
     {
@@ -52,7 +53,7 @@ export const Home = () => {
         year: 2008,
         genre: "Drama",
         rating: 9.5,
-        type: "serie",
+        type: "series",
         watched: true
     },
     {
@@ -62,7 +63,7 @@ export const Home = () => {
         year: 1999,
         genre: "Sci-fi",
         rating: 8.7,
-        type: "pelicula",
+        type: "movie",
         watched: true
     },
     {
@@ -70,9 +71,9 @@ export const Home = () => {
         title: "The Office",
         director: "Greg Daniels",
         year: 2005,
-        genre: "Comedia",
+        genre: "Comedy",
         rating: 8.9,
-        type: "serie",
+        type: "series",
         watched: false
     },
     {
@@ -82,7 +83,7 @@ export const Home = () => {
         year: 2019,
         genre: "Thriller",
         rating: 8.6,
-        type: "pelicula",
+        type: "movie",
         watched: true
     },
     {
@@ -92,7 +93,7 @@ export const Home = () => {
         year: 2016,
         genre: "Sci-fi",
         rating: 8.7,
-        type: "serie",
+        type: "series",
         watched: false
     },
     {
@@ -102,16 +103,39 @@ export const Home = () => {
         year: 2014,
         genre: "Drama",
         rating: 8.5,
-        type: "pelicula",
+        type: "movie",
         watched: true
     }
     ])
+    const [filters, setFilters] = useState({
+        search: "",
+        type: "all",
+        genre: "all",
+        sortBy: null,
+        order: "ascendant"
+    })
+    const filteredList = items.filter(item =>{
+        const matchSearch = 
+            item.title.toLowerCase().includes(filters.search.toLowerCase()) ||
+            item.director.toLowerCase().includes(filters.search.toLowerCase());
+        
+        const matchType = filters.type === "all" || item.type === filters.type;
 
+        const matchGenre = filters.genre === "all" || item.genre === filters.genre;
+
+        return matchSearch && matchType && matchGenre;
+    })
+    .sort((a,b) => {
+        if(!filters.sortBy) return 0;
+        const modifier = filters.order === "ascendant" ? 1 : -1;
+        return(a[filters.sortBy] - b[filters.sortBy]) * modifier;
+    })
 
     return (
         <div>
             <Title text="Not-flix" />
-            <ListItems list={items}/>
+            <Filters filters={filters} setFilters={setFilters}/>
+            <ListItems list={filteredList}/>
         </div>
     )
 }
