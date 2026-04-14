@@ -133,7 +133,7 @@ export const Home = () => {
 
     return (
         <div>
-            <Title text="Not-flix" />
+            <Title text="NOT-FLIX" />
             <Filters filters={filters} setFilters={setFilters}/>
             <ListItems list={filteredList}/>
         </div>
