@@ -1,10 +1,10 @@
 import styles from "./Filters.module.css";
 
-export const Filters = ({filters, setFilters}) => {
+export const Filters = ({ filters, setFilters, genreCounts }) => {
 
     const handleChange = (e) => {
-        const {name, value} = e.target;console.log(name, value);
-        setFilters(prev =>({
+        const { name, value } = e.target; console.log(name, value);
+        setFilters(prev => ({
             ...prev, [name]: value
         }));
     };
@@ -14,7 +14,7 @@ export const Filters = ({filters, setFilters}) => {
     return (
         <div className={styles.bar}>
 
-            <input type="text" name="search" placeholder="Buscar por título o director" value={filters.search} onChange={handleChange}/>
+            <input type="text" name="search" placeholder="Buscar por título o director" value={filters.search} onChange={handleChange} />
 
             <select name="type" value={filters.type || "all"} onChange={handleChange}>
                 <option value="all">Todo</option>
@@ -24,10 +24,11 @@ export const Filters = ({filters, setFilters}) => {
 
             <select name="genre" value={filters.genre || "all"} onChange={handleChange}>
                 <option value="all">Todo</option>
-                <option value="Drama">Drama</option>
-                <option value="Comedy">Comedia</option>
-                <option value="Sci-fi">Sci-fi</option>
-                <option value="Thriller">Thriller</option>
+                {Object.entries(genreCounts).map(([genre, count]) => (
+                    <option key={genre} value={genre.toLowerCase()}>
+                        {genre} ({count})
+                    </option>
+                ))}
             </select>
 
             <select name="sortBy" value={filters.sortBy || ""} onChange={handleChange}>

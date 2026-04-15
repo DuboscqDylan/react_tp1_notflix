@@ -283,6 +283,12 @@ export const Home = () => {
         return(a[filters.sortBy] - b[filters.sortBy]) * modifier;
     })
 
+    const genreCounts = items.reduce((acc, item) => {
+        const genre = item.genre;
+        acc[genre] = (acc[genre] || 0) + 1;
+        return acc;
+    }, {});
+
     const watchedList = filteredList.filter(item => item.watched);
     
     const unwatchedList = filteredList.filter(item => !item.watched);
@@ -290,7 +296,7 @@ export const Home = () => {
     return (
         <div>
             <Title text="NOT-FLIX" />
-            <Filters filters={filters} setFilters={setFilters}/>
+            <Filters filters={filters} setFilters={setFilters} genreCounts={genreCounts}/>
             <h2>Vistas ({watchedList.length})</h2>
             <ListItems list={watchedList}/>
             <h2>Por ver ({unwatchedList.length})</h2>
