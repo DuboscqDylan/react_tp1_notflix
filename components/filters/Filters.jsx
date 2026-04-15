@@ -25,7 +25,7 @@ export const Filters = ({ filters, setFilters, genreCounts }) => {
             <select name="genre" value={filters.genre || "all"} onChange={handleChange}>
                 <option value="all">Todo</option>
                 {Object.entries(genreCounts).map(([genre, count]) => (
-                    <option key={genre} value={genre.toLowerCase()}>
+                    <option key={genre} value={genre}>
                         {genre} ({count})
                     </option>
                 ))}
