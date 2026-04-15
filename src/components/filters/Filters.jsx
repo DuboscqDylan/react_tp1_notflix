@@ -3,13 +3,11 @@ import styles from "./Filters.module.css";
 export const Filters = ({ filters, setFilters, genreCounts }) => {
 
     const handleChange = (e) => {
-        const { name, value } = e.target; console.log(name, value);
+        const { name, value } = e.target;
         setFilters(prev => ({
             ...prev, [name]: value
         }));
     };
-
-
 
     return (
         <div className={styles.bar}>
