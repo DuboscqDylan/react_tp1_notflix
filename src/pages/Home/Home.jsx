@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Title } from "../../components/title/Title";
 import { ListItems } from "../../components/listItems/ListItems";
 import { Filters } from "../../components/filters/Filters";
@@ -6,7 +6,9 @@ import { FormItem } from "../../components/formItem/FormItem";
 
 export const Home = () => {
 
-    const [items, setItems] = useState([
+  const [items, setItems] = useState(() => {
+    const savedItems = localStorage.getItem("items"); 
+    return savedItems ? JSON.parse(savedItems) : [
         {
             id: 1,
             title: "Interstellar",
@@ -337,7 +339,8 @@ export const Home = () => {
             watched: true,
             image: "https://image.tmdb.org/t/p/w600_and_h900_face/a1DKL2yPyxoZthv0du5gcAWA0gw.jpg"
         }
-    ]);
+    ];
+   });
 
     const handleAddItem = (newItem) => {
         setItems([...items, newItem]);
@@ -350,6 +353,11 @@ export const Home = () => {
         sortBy: null,
         order: "ascendant"
     })
+
+    //se ejecuta cada vez que cambia de items
+    useEffect(() => {
+        localStorage.setItem("items", JSON.stringify(items));
+    }, [items]);
 
     const filteredList = items.filter(item => {
         const matchSearch =
