@@ -1,0 +1,76 @@
+.form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+
+  padding: 12px 16px;
+  margin-bottom: 20px;
+
+  background-color: #1e1e1e;
+  border: 1px solid #333;
+  border-radius: 10px;
+}
+
+/* Inputs y select */
+.input,
+.select {
+  background-color: #2a2a2a;
+  color: #e5e5e5;
+
+  border: 1px solid #444;
+  border-radius: 6px;
+
+  padding: 6px 10px;
+  font-size: 14px;
+}
+
+.input::placeholder {
+  color: #888;
+}
+
+.input:hover,
+.select:hover {
+  border-color: #666;
+}
+
+.input:focus,
+.select:focus {
+  outline: none;
+  border-color: #e50914;
+}
+
+/* Radios */
+.radioGroup {
+  display: flex;
+  gap: 10px;
+}
+
+.radioLabel {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: #e5e5e5;
+  font-size: 14px;
+}
+
+/* Botón */
+.button {
+  background-color: #e50914;
+  color: white;
+  border: none;
+
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.button:hover {
+  background-color: #b00610;
+}
+
+.title {
+  color: #fff;
+  font-weight: 600;
+}
