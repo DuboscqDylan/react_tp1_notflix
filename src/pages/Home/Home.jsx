@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Title } from "../../components/title/Title";
 import { ListItems } from "../../components/listItems/ListItems";
 import { Filters } from "../../components/filters/Filters";
+import { FormItem } from "../../components/formItem/FormItem";
 
 export const Home = () => {
 
@@ -338,6 +339,10 @@ export const Home = () => {
         }
     ]);
 
+    const handleAddItem = (newItem) => {
+        setItems([...items, newItem]);
+    };
+
     const [filters, setFilters] = useState({
         search: "",
         type: "all",
@@ -376,11 +381,13 @@ export const Home = () => {
     return (
         <div>
             <Title text="NOT-FLIX" />
+            
             <Filters filters={filters} setFilters={setFilters} genreCounts={genreCounts} />
             <h2>Vistas ({watchedList.length})</h2>
             <ListItems list={watchedList} />
             <h2>Por ver ({unwatchedList.length})</h2>
             <ListItems list={unwatchedList} />
+            <FormItem onAddItem={handleAddItem} />
         </div>
     )
 }
