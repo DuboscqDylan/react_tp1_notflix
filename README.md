@@ -105,6 +105,7 @@ npm run dev
 ```bash
 http://localhost:5173
 ```
+---
 ## Información técnica React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
@@ -122,6 +123,8 @@ The React Compiler is not enabled on this template because of its impact on dev 
 
 If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
 
+---
+
 ## 🧠 Funcionalidades implementadas
 
 ✔️ Renderizado de listas con .map()
@@ -138,11 +141,12 @@ If you are developing a production application, we recommend using TypeScript wi
 
 ✔️ Formulario para agregar contenido
 
-
+---
 ## 📸 Capturas
 
 ![alt text](../react_tp1_notflix/public/image/image.png)
 
+---
 ## 📝 Notas
 
 Se utilizó una arquitectura basada en componentes reutilizables.
@@ -151,12 +155,14 @@ Se aplicaron buenas prácticas de separación de responsabilidades.
 
 Se utilizó CSS Modules para evitar conflictos de estilos.
 
+---
 ## 📌 Linear
 
 Link al tablero:
 
 👉 [https://linear.app/pwa-cerda-duboscq/team/PWA/all]
 
+---
 ## 🔗 Repositorio
 
 👉 [https://github.com/DuboscqDylan/react_tp1_notflix#]
