@@ -128,7 +128,7 @@ export const FormItem = ({onAddItem}) => {
             type="radio"
             name="watched"
             value="true"
-            checked={form.watched === true}
+            checked={form.watched === "true"}
             onChange={handleChange}
            />
         Vista
@@ -139,7 +139,7 @@ export const FormItem = ({onAddItem}) => {
             type="radio"
             name="watched"
             value="false"
-            checked={form.watched === false}
+            checked={form.watched === "false"}
             onChange={handleChange}
            />
         No vista
