@@ -1,7 +1,7 @@
 import { CardItem } from "../cardItem/CardItem";
 import styles from "./ListItems.module.css";
 
-export const ListItems = ({ list, onDelete, onToggleWatched }) => {
+export const ListItems = ({ list, onDelete, onToggleWatched, onEdit }) => {
   return (
     <>
       <p>{list.length === 0 ? "No hay elementos en la lista" : ""}</p>
@@ -12,6 +12,7 @@ export const ListItems = ({ list, onDelete, onToggleWatched }) => {
               item={element}
               onDelete={onDelete}
               onToggleWatched={onToggleWatched}
+              onEdit={onEdit}
             />
           </li>
         ))}

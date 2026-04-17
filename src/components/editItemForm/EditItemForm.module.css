@@ -1,0 +1,116 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  z-index: 9999;
+}
+
+.modal {
+  background-color: #1e1e1e;
+  border: 1px solid #333;
+  border-radius: 12px;
+
+  padding: 20px;
+  width: 320px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.title {
+  color: #fff;
+  font-weight: 600;
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+.input,
+.select {
+  background-color: #2a2a2a;
+  color: #e5e5e5;
+
+  border: 1px solid #444;
+  border-radius: 6px;
+
+  padding: 6px 10px;
+  font-size: 14px;
+}
+
+.input::placeholder {
+  color: #888;
+}
+
+.input:hover,
+.select:hover {
+  border-color: #666;
+}
+
+.input:focus,
+.select:focus {
+  outline: none;
+  border-color: #e50914;
+}
+
+.radioGroup {
+  display: flex;
+  gap: 12px;
+}
+
+.radioLabel {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: #e5e5e5;
+  font-size: 14px;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.buttonPrimary {
+  background-color: #e50914;
+  color: white;
+  border: none;
+
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.buttonPrimary:hover {
+  background-color: #b00610;
+}
+
+.buttonSecondary {
+  background-color: transparent;
+  color: #ccc;
+  border: 1px solid #444;
+
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.buttonSecondary:hover {
+  border-color: #666;
+  color: #fff;
+}
