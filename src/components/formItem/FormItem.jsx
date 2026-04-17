@@ -30,6 +30,7 @@ export const FormItem = ({onAddItem}) => {
             ...form,
             year: Number(form.year),
             rating: Number(form.rating),
+            watched: form.watched === "true"
         };
 
         onAddItem(newItem);
