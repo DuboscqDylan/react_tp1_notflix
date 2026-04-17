@@ -15,11 +15,14 @@ NOT-FLIX es una aplicación desarrollada en React que permite gestionar películ
 
 El usuario puede:
 - ➕ Agregar nuevas películas o series
+- ✏️ Editar peliculas o series
+- 🗑️ Borrar peliculas o series
 - 👁️ Marcar contenido como visto o no visto
 - 🔍 Buscar por título o director
 - 🎭 Filtrar por género y tipo
 - 📊 Ordenar por año o rating
-- 🗑️ Visualizar listas separadas (Vistas / Por ver)
+- 🔖 Visualizar listas separadas (Vistas / Por ver)
+
 
 Los datos se almacenan en **localStorage**, por lo que no se pierden al recargar la página.
 
@@ -44,15 +47,18 @@ src/
 │ ├── title/
 │ ├── listItems/
 │ ├── cardItem/
+│ ├── deleteButton/
+│ ├── editItemForm/
 │ ├── filters/
-│ ├── formItem/
-│ └── errorMessage/
+│ └── formItem/
 │
 ├── pages/
 │ └── home/
 │
+├── App.css
 ├── App.jsx
-├── main.jsx
+├── index.css
+└── main.jsx
 
 ```
 ---
@@ -72,6 +78,9 @@ Define los estilos globales de la aplicación.
 Contiene las dependencias del proyecto y scripts como:
 - `npm run dev`
 - `npm install`
+
+### 📄 vite.config.js
+Contiene la configuracion Vite, donde se define como se ejecuta  y construye el proyecto
 
 ---
 
@@ -93,14 +102,18 @@ cd react_tp1_notflix
 ```bash
 npm install
 ```
-
-4. Ejecutar la aplicación
+4. Instalar reac-icons 
+   
+```bash
+npm install react-icons
+```
+5. Ejecutar la aplicación
 
 ```bash
 npm run dev
 ```
 
-5. Abrir el navegador
+6. Abrir el navegador
    
 ```bash
 http://localhost:5173
@@ -158,8 +171,6 @@ Se utilizó CSS Modules para evitar conflictos de estilos.
 ---
 ## 📌 Linear
 
-Link al tablero:
-
 👉 [https://linear.app/pwa-cerda-duboscq/team/PWA/all]
 
 ---
@@ -167,3 +178,6 @@ Link al tablero:
 
 👉 [https://github.com/DuboscqDylan/react_tp1_notflix#]
 
+## 📌 Vercel 
+
+👉 [https://react-tp1-notflix-git-main-duboscqdylans-projects.vercel.app/]
