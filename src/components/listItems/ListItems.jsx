@@ -1,17 +1,21 @@
 import { CardItem } from "../cardItem/CardItem";
 import styles from "./ListItems.module.css";
 
-export const ListItems = ({ list }) => {
-    return (
-        <>
-        <p>{list.length === 0 ? "No hay elementos en la lista" : ""}</p>
-        <ol className={styles.list}>
-            {list.map((element) => (
-                <li key={element.id}>
-                    <CardItem item={element} />
-                </li>
-            ))}
-        </ol>
-        </>
-    )
-}
+export const ListItems = ({ list, onDelete, onToggleWatched }) => {
+  return (
+    <>
+      <p>{list.length === 0 ? "No hay elementos en la lista" : ""}</p>
+      <ol className={styles.list}>
+        {list.map((element) => (
+          <li key={element.id}>
+            <CardItem
+              item={element}
+              onDelete={onDelete}
+              onToggleWatched={onToggleWatched}
+            />
+          </li>
+        ))}
+      </ol>
+    </>
+  );
+};
