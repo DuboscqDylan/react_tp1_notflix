@@ -30,6 +30,7 @@ export const FormItem = ({onAddItem}) => {
             ...form,
             year: Number(form.year),
             rating: Number(form.rating),
+            watched: form.watched === "true"
         };
 
         onAddItem(newItem);
@@ -128,7 +129,7 @@ export const FormItem = ({onAddItem}) => {
             type="radio"
             name="watched"
             value="true"
-            checked={form.watched === true}
+            checked={form.watched === "true"}
             onChange={handleChange}
            />
         Vista
@@ -139,7 +140,7 @@ export const FormItem = ({onAddItem}) => {
             type="radio"
             name="watched"
             value="false"
-            checked={form.watched === false}
+            checked={form.watched === "false"}
             onChange={handleChange}
            />
         No vista
