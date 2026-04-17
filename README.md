@@ -173,7 +173,6 @@ Se utilizó CSS Modules para evitar conflictos de estilos.
 
 👉 [https://linear.app/pwa-cerda-duboscq/team/PWA/all]
 
----
 ## 🔗 Repositorio
 
 👉 [https://github.com/DuboscqDylan/react_tp1_notflix#]
@@ -181,3 +180,5 @@ Se utilizó CSS Modules para evitar conflictos de estilos.
 ## 📌 Vercel 
 
 👉 [https://react-tp1-notflix-git-main-duboscqdylans-projects.vercel.app/]
+
+---
