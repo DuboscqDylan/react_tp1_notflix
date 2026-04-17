@@ -1,20 +1,53 @@
-import { useState } from "react";
-import { BsEye, BsEyeSlash, BsPencil, BsTrash } from "react-icons/bs"; // 1. Import icons
+import { useState, useEffect, useRef } from "react";
+import { BsEye, BsEyeSlash, BsPencil, BsTrash } from "react-icons/bs";
 import styles from "./CardItem.module.css";
 
-export const CardItem = ({ item }) => {
+export const CardItem = ({ item, onDelete, onToggleWatched }) => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const menuRef = useRef(null);
 
+  // Toggle menu visibility (stop propagation to avoid card clicks)
   const toggleMenu = (e) => {
     e.stopPropagation();
-    setMenuOpen((prev) => !prev);
+    setMenuOpen(prev => !prev);
   };
+
+  // Handle toggle watched action
+  const handleToggle = (e) => {
+    e.stopPropagation();
+    onToggleWatched(item.id);
+    setMenuOpen(false);
+  };
+
+  // Handle delete action
+  const handleDelete = (e) => {
+    e.stopPropagation();
+    onDelete(item.id);
+    setMenuOpen(false);
+  };
+
+  // Close menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        setMenuOpen(false);
+      }
+    };
+
+    if (menuOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [menuOpen]);
 
   const ToggleIcon = item.watched ? BsEyeSlash : BsEye;
   const toggleText = item.watched ? "Marcar como no visto" : "Marcar como visto";
 
   return (
-    <div className={styles.card}>
+    <div className={styles.card} ref={menuRef}>
       <div className={styles.cardInner}>
         <img src={item.image} alt={item.title} className={styles.image} />
         <div className={styles.overlay}>
@@ -28,20 +61,22 @@ export const CardItem = ({ item }) => {
         className={styles.optionsButton}
         onClick={toggleMenu}
         aria-label="Options"
-        title="Options"
       >
         ⋯
       </button>
 
       {menuOpen && (
         <div className={styles.dropdownMenu}>
-          <button className={styles.dropdownItem}>
+          <button className={styles.dropdownItem} onClick={handleToggle}>
             <ToggleIcon className={styles.icon} /> {toggleText}
           </button>
-          <button className={styles.dropdownItem}>
+          <button className={styles.dropdownItem} onClick={() => {}}>
             <BsPencil className={styles.icon} /> Editar
           </button>
-          <button className={`${styles.dropdownItem} ${styles.deleteItem}`}>
+          <button
+            className={`${styles.dropdownItem} ${styles.deleteItem}`}
+            onClick={handleDelete}
+          >
             <BsTrash className={styles.icon} /> Borrar
           </button>
         </div>

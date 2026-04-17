@@ -4,11 +4,7 @@ import { ListItems } from "../../components/listItems/ListItems";
 import { Filters } from "../../components/filters/Filters";
 import { FormItem } from "../../components/formItem/FormItem";
 
-export const Home = () => {
-
-  const [items, setItems] = useState(() => {
-    const savedItems = localStorage.getItem("items"); 
-    return savedItems ? JSON.parse(savedItems) : [
+const defaultItems = [
         {
             id: 1,
             title: "Interstellar",
@@ -338,64 +334,101 @@ export const Home = () => {
             type: "movie",
             watched: true,
             image: "https://image.tmdb.org/t/p/w600_and_h900_face/a1DKL2yPyxoZthv0du5gcAWA0gw.jpg"
-        }
-    ];
-   });
+        }    
+];
 
-    const handleAddItem = (newItem) => {
-        setItems([...items, newItem]);
-    };
+const STORAGE_KEY = "notflix_items";
 
-    const [filters, setFilters] = useState({
-        search: "",
-        type: "all",
-        genre: "all",
-        sortBy: null,
-        order: "ascendant"
+
+export const Home = () => {
+  const [items, setItems] = useState(() => {
+    const stored = localStorage.getItem(STORAGE_KEY);
+    if (stored) {
+      try {
+        return JSON.parse(stored);
+      } catch {
+        return defaultItems;
+      }
+    }
+    return defaultItems;
+  });
+
+  useEffect(() => {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
+  }, [items]);
+
+  const handleAddItem = (newItem) => {
+    setItems(prev => [...prev, newItem]);
+  };
+
+  const handleDeleteItem = (id) => {
+    setItems(prev => prev.filter(item => item.id !== id));
+  };
+
+  const handleToggleWatched = (id) => {
+    setItems(prev =>
+      prev.map(item =>
+        item.id === id ? { ...item, watched: !item.watched } : item
+      )
+    );
+  };
+
+  const [filters, setFilters] = useState({
+    search: "",
+    type: "all",
+    genre: "all",
+    sortBy: null,
+    order: "ascendant"
+  });
+
+  const filteredList = items
+    .filter(item => {
+      const matchSearch =
+        item.title.toLowerCase().includes(filters.search.toLowerCase()) ||
+        item.director.toLowerCase().includes(filters.search.toLowerCase());
+      const matchType = filters.type === "all" || item.type === filters.type;
+      const matchGenre = filters.genre === "all" || item.genre === filters.genre;
+      return matchSearch && matchType && matchGenre;
     })
+    .sort((a, b) => {
+      if (!filters.sortBy) return 0;
+      const modifier = filters.order === "ascendant" ? 1 : -1;
+      return (a[filters.sortBy] - b[filters.sortBy]) * modifier;
+    });
 
-    //se ejecuta cada vez que cambia de items
-    useEffect(() => {
-        localStorage.setItem("items", JSON.stringify(items));
-    }, [items]);
+  const genreCounts = items.reduce((acc, item) => {
+    acc[item.genre] = (acc[item.genre] || 0) + 1;
+    return acc;
+  }, {});
 
-    const filteredList = items.filter(item => {
-        const matchSearch =
-            item.title.toLowerCase().includes(filters.search.toLowerCase()) ||
-            item.director.toLowerCase().includes(filters.search.toLowerCase());
+  const watchedList = filteredList.filter(item => item.watched);
+  const unwatchedList = filteredList.filter(item => !item.watched);
 
-        const matchType = filters.type === "all" || item.type === filters.type;
+  return (
+    <div>
+      <Title text="NOT-FLIX" />
 
-        const matchGenre = filters.genre === "all" || item.genre === filters.genre;
+      <Filters
+        filters={filters}
+        setFilters={setFilters}
+        genreCounts={genreCounts}
+      />
 
-        return matchSearch && matchType && matchGenre;
-    })
-        .sort((a, b) => {
-            if (!filters.sortBy) return 0;
-            const modifier = filters.order === "ascendant" ? 1 : -1;
-            return (a[filters.sortBy] - b[filters.sortBy]) * modifier;
-        })
+      <h2>Vistas ({watchedList.length})</h2>
+      <ListItems
+        list={watchedList}
+        onDelete={handleDeleteItem}
+        onToggleWatched={handleToggleWatched}
+      />
 
-    const genreCounts = items.reduce((acc, item) => {
-        const genre = item.genre;
-        acc[genre] = (acc[genre] || 0) + 1;
-        return acc;
-    }, {});
+      <h2>Por ver ({unwatchedList.length})</h2>
+      <ListItems
+        list={unwatchedList}
+        onDelete={handleDeleteItem}
+        onToggleWatched={handleToggleWatched}
+      />
 
-    const watchedList = filteredList.filter(item => item.watched);
-
-    const unwatchedList = filteredList.filter(item => !item.watched);
-
-    return (
-        <div>
-            <Title text="NOT-FLIX" />
-            
-            <Filters filters={filters} setFilters={setFilters} genreCounts={genreCounts} />
-            <h2>Vistas ({watchedList.length})</h2>
-            <ListItems list={watchedList} />
-            <h2>Por ver ({unwatchedList.length})</h2>
-            <ListItems list={unwatchedList} />
-            <FormItem onAddItem={handleAddItem} />
-        </div>
-    )
-}
+      <FormItem onAddItem={handleAddItem} />
+    </div>
+  );
+};
